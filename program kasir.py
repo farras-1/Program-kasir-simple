@@ -1,15 +1,31 @@
-#username = 123
-#password = 123
+# password
 
-user = "123"
-password = "123"
+try:
+    print("=========================================")
+    print("buat akun baru")
+    user = input("tolong masukkan nama :")
+    while user == "":
+        print("nama tidak boleh kosong")
+        user = input("tolong masukkan nama :")
 
+    userpass = input("tolong masukkan pasword :")
+    while userpass == "":
+        print("password tidak boleh kosong")
+        userpass = input("tolong masukkan password :")
 
-username = input("please insert username :")
-password = input("please insert password :")
+        print("akun berhasil dibuat")
+except:
+    print("akun gagal dibuat, harap coba lagi")
+print("=========================================")
+print("harap login")
+username = input("tolong masukkan username :")
+password = input("tolong masukkan password :")
+print("=========================================")
 
-if username == user and password == password:
+if username == user and password == userpass:
     print("login success")
+
+# menu
 
     def menu():
         print("menu:")
@@ -78,7 +94,7 @@ if username == user and password == password:
                 print(f"{x}. {barang['nama']} - {barang['harga']}")
                 x += 1
     
-        except ValueError:
+        except:
             print("Input tidak valid. Harap masukkan angka sesuai dengan belanjaan anda.")
 
     def fungsi5Pembayaran():
@@ -115,33 +131,40 @@ if username == user and password == password:
                 print("uang anda pas")
         except:
             print("harap masukkan nominal dengan benar(tanpa titik)")
-
     def fungsi6nota():
         try:
-            with open("nota belanja.txt", "w") as file:
-                file.write("=== NOTA BELANJA ===\n")
-                for idx, barang in enumerate(keranjang, 1):
-                    file.write(f"{idx}. {barang['nama']} - Rp{barang['harga']}\n")
-                file.write(f"\nTotal Belanja       : Rp{(harga)}")
-                file.write(f"\nUang anda           : Rp{(pembayaran)}")
-                file.write(f"\nKembalian anda      : Rp{(kembalian)}")
-                file.write(f"\nKekurangan anda     : Rp{(kurangan)}")
+            if pembayaran == []:
+                print("anda belum melakukan pembayaran")
+                return
+            else:
+            
+                with open("nota belanja.txt", "w") as file:
+                    file.write("=== NOTA BELANJA ===\n")
+                    for idx, barang in enumerate(keranjang, 1):
+                        file.write(f"{idx}. {barang['nama']} - Rp{barang['harga']}\n")
+                    file.write(f"\nTotal Belanja       : Rp{(harga)}")
+                    file.write(f"\nUang anda           : Rp{(pembayaran)}")
+                    file.write(f"\nKembalian anda      : Rp{(kembalian)}")
+                    file.write(f"\nKekurangan anda     : Rp{(kurangan)}")
 
 
-                file.write("\n=====================")
+                    file.write("\n=====================")
 
-            print("Nota berhasil disimpan ke dalam file 'nota_belanja.txt'")
+                print("Nota berhasil disimpan ke dalam file 'nota_belanja.txt'")
 
-        except Exception as e:
-            print("Terjadi kesalahan:", e)
+        except:
+            print("Terjadi kesalahan:")
 
-
+# penyimpanan
         
     keranjang = []
     harga= []
     pembayaran = []
     kurangan = []
     kembalian = []
+
+# perulangan 
+
     while True:
         menu()
         pilihan = input("pilih menunya: ")
@@ -163,5 +186,4 @@ if username == user and password == password:
         else:
             print("pilihan tidak falid, pilih nomor antara 1 - 7")
 else:
-    print("password atau username tidak valid")
-    
+    print("password atau username tidak valid")
